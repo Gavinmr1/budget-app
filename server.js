@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/flashdb.flash_collection", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/flashdb", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
