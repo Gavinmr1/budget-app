@@ -11,20 +11,20 @@ fetch("/api/transaction")
   });
 
 function populateTotal() {
-  const total = transactions.reduce((total, t) => {
+  let total = transactions.reduce((total, t) => {
     return total + parseInt(t.value);
   }, 0);
 
-  const totalEl = document.querySelector("#total");
+  let totalEl = document.querySelector("#total");
   totalEl.textContent = total;
 }
 
 function populateTable() {
-  const tbody = document.querySelector("#tbody");
+  let tbody = document.querySelector("#tbody");
   tbody.innerHTML = "";
 
   transactions.forEach(transaction => {
-    const tr = document.createElement("tr");
+    let tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${transaction.name}</td>
       <td>${transaction.value}</td>
@@ -35,15 +35,15 @@ function populateTable() {
 }
 
 function populateChart() {
-  const reversed = transactions.slice().reverse();
+  let reversed = transactions.slice().reverse();
   let sum = 0;
 
-  const labels = reversed.map(t => {
-    const date = new Date(t.date);
+  let labels = reversed.map(t => {
+    let date = new Date(t.date);
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   });
 
-  const data = reversed.map(t => {
+  let data = reversed.map(t => {
     sum += parseInt(t.value);
     return sum;
   });
@@ -52,7 +52,7 @@ function populateChart() {
     myChart.destroy();
   }
 
-  const ctx = document.getElementById("my-chart").getContext("2d");
+  let ctx = document.getElementById("my-chart").getContext("2d");
 
   myChart = new Chart(ctx, {
     type: "line",
@@ -71,9 +71,9 @@ function populateChart() {
 }
 
 function sendTransaction(isAdding) {
-  const nameEl = document.querySelector("#t-name");
-  const amountEl = document.querySelector("#t-amount");
-  const errorEl = document.querySelector("form .error");
+  let nameEl = document.querySelector("#t-name");
+  let amountEl = document.querySelector("#t-amount");
+  let errorEl = document.querySelector("form .error");
 
   if (nameEl.value === "" || amountEl.value === "") {
     errorEl.textContent = "Missing Information";
@@ -82,7 +82,7 @@ function sendTransaction(isAdding) {
     errorEl.textContent = "";
   }
 
-  const transaction = {
+  let transaction = {
     name: nameEl.value,
     value: amountEl.value,
     date: new Date().toISOString()
